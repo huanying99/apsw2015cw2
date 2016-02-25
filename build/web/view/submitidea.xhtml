@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Project Idea Submission Title</title>
+    </h:head>
+    <h:body>
+    <h:form>
+   <TABLE width="100%" border="1" cellspacing="0" cellpadding="0">
+
+  <TR bgcolor="purple"> 
+
+    <TD bgcolor="#551a8b" align="center"> 
+
+      <H1><FONT color="#FFffff">SUMS</FONT></H1>
+
+      <H5><FONT color="#CCcccc"> <FONT size="+1">S</FONT>tudent <FONT size="+1">U</FONT>nits 
+
+        <FONT size="+1">M</FONT>anagement <FONT size="+1">S</FONT>ystem<BR />
+
+        </FONT><FONT color="#CCcccc">for the School of Computing &amp; Maths</FONT></H5>
+
+      </TD>
+
+  </TR>
+</TABLE> 
+<table width="100%" border="1" cellpadding="5" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Title:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.title}" id="projectideatitle" style="width: 250px" required="true" requiredMessage="project idea title is required" validatorMessage="project idea title is required">
+                                </h:inputText>
+                            <h:message for="projectideatitle" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.pidesc}" id="projectideadesc" style="width: 250px" required="true" requiredMessage="project idea description is required">
+                            </h:inputText>
+                            <h:message for="projectideadesc" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aim:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.aim}" id="projectideaaim" style="width: 250px" required="true" requiredMessage="project idea aim is required">
+                            </h:inputText>
+                            <h:message for="projectideaaim" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Academic Questions:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.academicquestion}" id="projectideaques" style="width: 250px" required="true" requiredMessage="project idea academic question is required">
+                            </h:inputText>
+                            <h:message for="projectideaques" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Category:&nbsp;</td>
+                        <td colspan="2">
+                            <h:selectManyListbox  value="#{ideasCategoriesController.c.ideacategorydesc}" id="categories" style="width: 282px" required="true" requiredMessage="category required."> 
+                                <c:forEach var="categ" items="#{ideasCategoriesController.allCategories}">
+                                    <f:selectItem itemValue="${categ.ideacategoryid}" itemLabel="${categ.ideacategorydesc}"/>
+                                </c:forEach>
+                            </h:selectManyListbox>
+                        </td>                 
+                    </tr>
+                    <tr>
+                        <td>No of Student:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.noofstudent}" id="prefernoofstudent" style="width: 250px" required="true" requiredMessage="project idea academic question is required">
+                            </h:inputText>
+                            <h:message for="prefernoofstudent" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><h:commandButton value="Add Project Idea" action="#{projectideasContoller.doaddProjectIdea()}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </h:form>
+    </h:body>
+</html>
+
