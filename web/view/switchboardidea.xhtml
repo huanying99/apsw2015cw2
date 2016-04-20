@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Students and Unit Management System</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
+
+            <div class="inner">
+                <div class="NavPanel">
+                <div class="NavPanelin">
+                    <p class="NavList"><h:commandLink id="editlnk" value="Submit Project Idea" action="#{projectideasContoller.displayProjectSubmitidea()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="projectidealnk" value="Edit Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Search Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Processing" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                </div>
+                </div>
+                <div class="Content">
+                        
+                </div>
+             
+            </div>
+           </div>
+        </h:form>        
+    </h:body>
+</html>
+
