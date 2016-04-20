@@ -11,5 +11,5 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="sumscw2" object-type="user" pool-name="derby_net_apsw2015cw2_apsw2015cw2Pool"/>
-    <jdbc-resource enabled="true" jndi-name="sums2" object-type="user" pool-name="derby_net_apsw2015cw2_apsw2015cw2Pool"/>
+    <jdbc-resource enabled="true" jndi-name="apsw2015cw2" object-type="user" pool-name="derby_net_apsw2015cw2_apsw2015cw2Pool"/>
 </resources>

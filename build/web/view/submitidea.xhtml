@@ -2,32 +2,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:head>
-        <title>Project Idea Submission Title</title>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+ <h:head>
+                <title>Students and Unit Management System</title>
+                <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+                <link href="../resourses/css/table-style.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body>
-    <h:form>
-   <TABLE width="100%" border="1" cellspacing="0" cellpadding="0">
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;"><h:commandLink id="logoutlnk" value="Logout" action="#{registrationController.doLogout()}" immediate="true"/></li> <li style="color: white; float: right;"><h:outputText value="#{registrationController.UNameSession}"/></li></ul></div>
 
-  <TR bgcolor="purple"> 
-
-    <TD bgcolor="#551a8b" align="center"> 
-
-      <H1><FONT color="#FFffff">SUMS</FONT></H1>
-
-      <H5><FONT color="#CCcccc"> <FONT size="+1">S</FONT>tudent <FONT size="+1">U</FONT>nits 
-
-        <FONT size="+1">M</FONT>anagement <FONT size="+1">S</FONT>ystem<BR />
-
-        </FONT><FONT color="#CCcccc">for the School of Computing &amp; Maths</FONT></H5>
-
-      </TD>
-
-  </TR>
-</TABLE> 
-<table width="100%" border="1" cellpadding="5" cellspacing="0">
+            <div class="inner">
+                <div class="NavPanel">
+                <div class="NavPanelin">
+                    <p style="margin:0px; border-top-left-radius:5px; border-top-right-radius:5px; background-color:#551a8b; color:white; font-weight:bolder; font-size: 11px; text-align: center">Project Idea</p>
+                    <p class="NavList"><h:commandLink id="editlnk" value="Submit Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="projectidealnk" value="Edit Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Search Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Processing"></h:commandLink></p>
+                </div>
+                </div>
+                <div class="Content">
+                    <p class="titleParag0"><span class="title0">Project Idea Submission</span></p>
+                <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tbody>
                     <tr>
                         <td>Title:</td>
@@ -64,11 +63,18 @@
                     <tr>
                         <td>Category:&nbsp;</td>
                         <td colspan="2">
-                            <h:selectManyListbox  value="#{ideasCategoriesController.c.ideacategorydesc}" id="categories" style="width: 282px" required="true" requiredMessage="category required."> 
+ <!--                           <h:selectOneMenu  value="#{ideasCategoriesController.c.ideacategorydesc}" id="categories" style="width: 254px" required="true" requiredMessage="category required."> 
                                 <c:forEach var="categ" items="#{ideasCategoriesController.allCategories}">
                                     <f:selectItem itemValue="${categ.ideacategoryid}" itemLabel="${categ.ideacategorydesc}"/>
                                 </c:forEach>
-                            </h:selectManyListbox>
+                            </h:selectOneMenu> -->
+                            
+                            <h:selectOneMenu value="#{projectideasContoller.pi.picategory}">
+                                <f:selectItem itemValue="1" itemLabel="Engineering" />
+                                <f:selectItem itemValue="2" itemLabel="Research" />
+                                <f:selectItem itemValue="3" itemLabel="Study" />
+                                <f:selectItem itemValue="3" itemLabel="Group" />
+                            </h:selectOneMenu>
                         </td>                 
                     </tr>
                     <tr>
@@ -85,7 +91,48 @@
                     </tr>
                 </tbody>
             </table>
-    </h:form>
+        <h:graphicImage id="submitsuccessimg" url="#{projectideasContoller.ideasuccessimgurl}" />
+            <h:outputText value="&nbsp;" escape="false" />
+            <h:outputText value="#{projectideasContoller.submitideasucess}" style="color: green; font-size: 12px; font-weight: bold" />             
+            <p class="titleParag00"><span class="title00">Ideas List</span></p>
+            <!-- begin of idea grid -->
+            <h:dataTable binding="#{table}" value="#{projectideasContoller.ideasUntreated}" var="idea" border="2" class="regularTable">
+               <h:column>
+                    <f:facet name="header">S/No</f:facet>
+                    #{table.rowIndex+1}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{idea.title}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    <h:outputText value="#{idea.pidesc}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Aim</f:facet>
+                    <h:outputText value="#{idea.aim}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Academic Question</f:facet>
+                    <h:outputText value="#{idea.academicquestion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandLink value="Edit" immediate="true" action="#{projectideasContoller.showDetails(idea)}" />
+                        <f:param id="idea_id" name="registration_id" value="#{idea.id}" />
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:commandLink value="Delete" immediate="true" onclick="if (!confirm('Are you sure?')) return false" />                
+                </h:column>
+            </h:dataTable>
+            <!-- end of idea grid -->
+    </div>
+             
+            </div>
+           </div>
+        </h:form>        
     </h:body>
-</html>
+</html>   
 

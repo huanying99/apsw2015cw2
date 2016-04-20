@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    <title>Students and Unit Management System</title>
+        <link href="../resourses/css/Layout.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="Container">
+                <div class="Header"><p style="font-size: 18px;">Student And Unit Management System</p></div>
+                <div class="Menubar"><ul><li style="color: white;">Logout</li> <li style="color: white; float: right;">Hi,Ojo Emmanuel</li></ul></div>
+
+            <div class="inner">
+                <div class="NavPanel">
+                <div class="NavPanelin">
+                    <p class="NavList"><h:commandLink id="editlnk" value="Submit Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="projectidealnk" value="Edit Project Idea" action="#{projectideasContoller.displayProjectIdeaModule()}" immediate="true"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideaallocationlnk" value="Search Project Idea"></h:commandLink></p>
+                    <p class="NavList"><h:commandLink id="ideamonitoringlnk" value="Project Idea Processing"></h:commandLink></p>
+                </div>
+                </div>
+                <div class="Content">                    
+                    <p class="titleParag0"><span class="title0">Project Idea Approver</span></p>                    
+                    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>Title:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.title}" id="projectideatitle" style="width: 250px" required="true" requiredMessage="project idea title is required" validatorMessage="project idea title is required">
+                                </h:inputText>
+                            <h:message for="projectideatitle" style="color:red"/>
+                            <h:inputHidden value="#{projectideasContoller.ideaDetails.id}" id="registration_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.pidesc}" id="projectideadesc" style="width: 250px" required="true" requiredMessage="project idea description is required">
+                            </h:inputText>
+                            <h:message for="projectideadesc" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Aim:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.aim}" id="projectideaaim" style="width: 250px" required="true" requiredMessage="project idea aim is required">
+                            </h:inputText>
+                            <h:message for="projectideaaim" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Academic Question:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.academicquestion}" id="projectideaques" style="width: 250px" required="true" requiredMessage="project idea academic question is required">
+                            </h:inputText>
+                            <h:message for="projectideaques" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Category:&nbsp;</td>
+                        <td colspan="2">
+                            <h:selectOneMenu  value="#{projectideasContoller.pi.picategory}" id="categories" style="width: 254px" required="true" requiredMessage="category required.">
+                                <f:selectItem itemValue="1" itemLabel="Engineering" />
+                                <f:selectItem itemValue="2" itemLabel="Research" />
+                                <f:selectItem itemValue="3" itemLabel="Study" />
+                                <f:selectItem itemValue="3" itemLabel="Group" />
+                            </h:selectOneMenu>
+                        </td>                 
+                    </tr>
+                    <tr>
+                        <td>No of Student:</td>
+                        <td colspan="2">
+                            <h:inputText value="#{projectideasContoller.pi.noofstudent}" id="prefernoofstudent" style="width: 250px" required="true" requiredMessage="project idea academic question is required">
+                            </h:inputText>
+                            <h:message for="prefernoofstudent" style="color:red"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h:selectOneRadio value="#{projectideasContoller.searchgrp}">                                
+                                <f:selectItem itemValue="1" itemLabel="Approve" />
+                                <f:selectItem itemValue="2" itemLabel="Disapprove" />
+                            </h:selectOneRadio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><h:commandButton value="Approve" action="#{projectideasContoller.updateProjectIdea()}"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <h:graphicImage id="submitsuccessimg" url="#{projectideasContoller.ideasuccessimgurl}" />
+            <h:outputText value="&nbsp;" escape="false" />
+            <h:outputText value="#{projectideasContoller.submitideasucess}" style="color: green; font-size: 12px; font-weight: bold" /> 
+    </div>
+             
+            </div>
+           </div>
+        </h:form>        
+    </h:body>
+</html>
+

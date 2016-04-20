@@ -5,12 +5,12 @@
  */
 package bus;
 
-import ents.Projectideas;
+import ents.Project;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import pers.ProjectideasFacade;
+import pers.ProjectFacade;
 
 /**
  *
@@ -18,50 +18,79 @@ import pers.ProjectideasFacade;
  */
 @Stateless
 public class ProjectIdeaService {
-
-    @EJB
-        private ProjectideasFacade pif;
+@EJB
+//        private ProjectideasFacade pif;
+        private ProjectFacade pif;
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public Projectideas addIdeas(Projectideas pi) {
+public Project addIdeas(Project pi) {
       if(true) {
           pif.create(pi);
       }  
       return pi;
     }
-    public List<Projectideas> findAllIdeas() {
+    public Project addIdeas2(Project pi, String ownercode) {
+      if(true) {
+          pif.create(pi);
+      }  
+      return pi;
+    }
+    public List<Project> findAllIdeas() {
         return pif.findAll();
       }
           //pagination methods begins here
     public int ideasCount() {
         return pif.count();
     }
-    public List<Projectideas> findRange(int [] range) {
+    public List<Project> findRange(int [] range) {
         return pif.findRange(range);
     }
     
-    public String projectideaExistStatus(Projectideas pi) {
+    public String projectideaExistStatus(Project pi) {
         //report sucess person exist and failure otherwise
-        List<Projectideas> list = pif.findProjectIdeaByName(pi.getTitle());
+        List<Project> list = pif.findProjectIdeaByName(pi.getTitle());
         if (list.isEmpty()) {
             return "Sucess";
         } else {
             return "Failure";
         }
     }
-    
-    public List<Projectideas> findAllProjectIdeaByTitleCriteria(String searchstring){
+    public  Project updatePIdea(Project pi) {
+        pif.edit(pi);
+        return pi;
+    }
+    //search Project Ideas by the title field.
+    public List<Project> findAllProjectIdeaByTitleCriteria(String searchstring){
          return pif.findProjectIdeaByNameLike(searchstring);
     }
-    
-    public List<Projectideas> findAllProjectIdeaByGroup(int groupid){
+    //search Project Ideas using a search criteria on any field
+    public List<Project> findAllProjectIdeaByAnyFieldCriteria(String searchstring){
+         return pif.findProjectIdeaByAnyFieldLike(searchstring);
+    }
+    //search untreated Project Ideas using a search criteria on any field
+    public List<Project> findAllUnprocessProjectIdeaByAnyFieldCriteria(String searchstring){
+         return pif.findUntreatedProjectIdeaByAnyFieldLike(searchstring);
+    }
+    //find all project ideas by category
+    public List<Project> findAllProjectIdeaByGroup(int groupid){
          return pif.findProjectIdeaByCategory(groupid);
     }
-    public List<Projectideas> findAllProjectIdeaWithinPeriod(Date startprd, Date endprd){
+    //find all unprocess project ideas by category
+    public List<Project> findAllUnprocessProjectIdeaByGroup(int groupid){
+         return pif.findUntreatedProjectIdeaByCategory(groupid);
+    }
+    public List<Project> findAllProjectIdeaWithinPeriod(Date startprd, Date endprd){
          return pif.findProjectIdeaByDatePrd(startprd, endprd);
     }
+    //find all project ideas by a user
+    public List<Project> findAllProjectIdeaByAUser(long ownercode){
+         return pif.findProjectIdeaByOwner(ownercode);
+    }
     
-    public List<Projectideas> findAllProjectIdeaWithinPeriodz(String startprdx, String endprdx){
+    public List<Project> findAllProjectIdeaWithinPeriodz(String startprdx, String endprdx){
          return pif.findProjectIdeaByDatePrdz(startprdx, endprdx);
+    }
+    public List<Project> findAllUntrestedProjectIdeas(){
+         return pif.findAllProjectIdeasUntreated();
     }
 }

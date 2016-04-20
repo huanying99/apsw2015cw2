@@ -7,117 +7,45 @@ package ents;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Pavilion
+ * @author up792072
  */
 @Entity
-@Table(name = "MILESTONEFEEDBACK")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Milestonefeedback.findAll", query = "SELECT m FROM Milestonefeedback m"),
-    @NamedQuery(name = "Milestonefeedback.findByMilestonefeedbackid", query = "SELECT m FROM Milestonefeedback m WHERE m.milestonefeedbackid = :milestonefeedbackid"),
-    @NamedQuery(name = "Milestonefeedback.findByMilestonemark", query = "SELECT m FROM Milestonefeedback m WHERE m.milestonemark = :milestonemark"),
-    @NamedQuery(name = "Milestonefeedback.findByFeedbacktimeread", query = "SELECT m FROM Milestonefeedback m WHERE m.feedbacktimeread = :feedbacktimeread"),
-    @NamedQuery(name = "Milestonefeedback.findByFeedbackrecordeddate", query = "SELECT m FROM Milestonefeedback m WHERE m.feedbackrecordeddate = :feedbackrecordeddate")})
 public class Milestonefeedback implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MILESTONEFEEDBACKID")
-    private Integer milestonefeedbackid;
-    @Lob
-    @Size(max = 32700)
-    @Column(name = "TEXTUALFEEDBACK")
-    private String textualfeedback;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MILESTONEMARK")
-    private int milestonemark;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FEEDBACKTIMEREAD")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date feedbacktimeread;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FEEDBACKRECORDEDDATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date feedbackrecordeddate;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private Date recordtime;// record the time when the supervisor or moderator provides feedback  
+    private Date readtime;// record the time when the student open the feedback provided by the supervisor or moderator
+    private Long mark;
+    private String supervisorfeedback;
+    private String moderatorfeedback;
 
-    public Milestonefeedback() {
+    @ManyToOne
+    private Milestones belongfeedback;
+
+
+    public Long getId() {
+        return id;
     }
 
-    public Milestonefeedback(Integer milestonefeedbackid) {
-        this.milestonefeedbackid = milestonefeedbackid;
-    }
-
-    public Milestonefeedback(Integer milestonefeedbackid, int milestonemark, Date feedbacktimeread, Date feedbackrecordeddate) {
-        this.milestonefeedbackid = milestonefeedbackid;
-        this.milestonemark = milestonemark;
-        this.feedbacktimeread = feedbacktimeread;
-        this.feedbackrecordeddate = feedbackrecordeddate;
-    }
-
-    public Integer getMilestonefeedbackid() {
-        return milestonefeedbackid;
-    }
-
-    public void setMilestonefeedbackid(Integer milestonefeedbackid) {
-        this.milestonefeedbackid = milestonefeedbackid;
-    }
-
-    public String getTextualfeedback() {
-        return textualfeedback;
-    }
-
-    public void setTextualfeedback(String textualfeedback) {
-        this.textualfeedback = textualfeedback;
-    }
-
-    public int getMilestonemark() {
-        return milestonemark;
-    }
-
-    public void setMilestonemark(int milestonemark) {
-        this.milestonemark = milestonemark;
-    }
-
-    public Date getFeedbacktimeread() {
-        return feedbacktimeread;
-    }
-
-    public void setFeedbacktimeread(Date feedbacktimeread) {
-        this.feedbacktimeread = feedbacktimeread;
-    }
-
-    public Date getFeedbackrecordeddate() {
-        return feedbackrecordeddate;
-    }
-
-    public void setFeedbackrecordeddate(Date feedbackrecordeddate) {
-        this.feedbackrecordeddate = feedbackrecordeddate;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (milestonefeedbackid != null ? milestonefeedbackid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -128,7 +56,7 @@ public class Milestonefeedback implements Serializable {
             return false;
         }
         Milestonefeedback other = (Milestonefeedback) object;
-        if ((this.milestonefeedbackid == null && other.milestonefeedbackid != null) || (this.milestonefeedbackid != null && !this.milestonefeedbackid.equals(other.milestonefeedbackid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -136,7 +64,7 @@ public class Milestonefeedback implements Serializable {
 
     @Override
     public String toString() {
-        return "ents.Milestonefeedback[ milestonefeedbackid=" + milestonefeedbackid + " ]";
+        return "ents.Milestonefeedback[ id=" + id + " ]";
     }
-    
+
 }
